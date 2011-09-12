@@ -15,13 +15,15 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "mail_envi"
-  gem.homepage = "http://github.com/yung.kwon@damncarousel.com/mail_envi"
+  gem.homepage = "http://github.com/nowk/mail_envi"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Mail interceptor for different environments}
+  gem.description = %Q{}
   gem.email = "yung.kwon@damncarousel.com"
   gem.authors = ["Yung Hwa Kwon"]
   # dependencies defined in Gemfile
+  gem.extra_rdoc_files = ['README.md']
+  gem.files.exclude '.rvmrc'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
