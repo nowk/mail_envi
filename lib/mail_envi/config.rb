@@ -1,7 +1,7 @@
 module MailEnvi
   class Config
     def initialize &block
-      @environments = ['development', 'test']
+      @environments = ['development']
 
       instance_eval(&block) if block_given?
     end

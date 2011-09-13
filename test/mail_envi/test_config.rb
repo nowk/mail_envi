@@ -16,25 +16,22 @@ class TestConfig < ActiveSupport::TestCase
 
   should "have defaults" do
     config = MailEnvi::Config.new
-    assert_equal ['development', 'test'], config.environments
+    assert_equal ['development'], config.environments
     assert_equal MailEnvi::DefaultInterceptor, config.interceptor
     assert_equal 'root@localhost', config.default_to
   end
 
   should "allow the interceptor to be assigned to a custom class" do
-    mock(MailEnvi).ronment {'development'}
-
     MailEnvi.config do |config|
       config.interceptor = CustomInterceptor
     end
 
-    mock(::Mail).register_interceptor(CustomInterceptor)
-    mail_envi.run_initializers
+    assert_equal CustomInterceptor, MailEnvi.config.interceptor
   end
 
   should "allow additional environments to be included" do
     MailEnvi.config do |config|
-      config.include_environments [:staging, 'beta']
+      config.include_environments [:test, :staging, 'beta']
     end
 
     assert_equal ['development', 'test', 'staging', 'beta'], 
