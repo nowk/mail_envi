@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mail_envi}
-  s.version = ""
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Yung Hwa Kwon}]
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.md",
     "Rakefile",
+    "VERSION",
     "lib/mail_envi.rb",
     "lib/mail_envi/config.rb",
     "mail_envi.gemspec",
