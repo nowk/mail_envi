@@ -4,7 +4,9 @@ require 'rails'
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'mail_envi'
 
-class TestMailEnvi < Test::Unit::TestCase
+class TestMailEnvi < ActiveSupport::TestCase
+  include ActiveSupport::Testing::Isolation
+
   def mail_envi
     MailEnvi::Rails::RailTie.new
   end
@@ -18,12 +20,17 @@ class TestMailEnvi < Test::Unit::TestCase
     end
   end
 
-  context "in a development environment" do
-    setup { stub(MailEnvi).ronment {'development'} }
+  context "in a development, test or included environments" do
+    should "register the default Mail interceptor" do
+      MailEnvi.config do |config|
+        config.include_environments [:staging, :beta]
+      end
 
-    should "register the Mail interceptor" do
-      mock(::Mail).register_interceptor(MailEnvi::Jealousy)
-      mail_envi.run_initializers
+      %w(development test staging beta).each do |v|
+        stub(MailEnvi).ronment {v}
+        mock(::Mail).register_interceptor(MailEnvi::Jealousy)
+        mail_envi.run_initializers
+      end
     end
   end
 

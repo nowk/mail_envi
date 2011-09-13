@@ -1,10 +1,15 @@
 require 'mail'
+require 'mail_envi/config'
 
 module MailEnvi
+  @config = nil
+
   module Rails
     class RailTie < ::Rails::Railtie
       initializer "mail_envi.register_interceptor" do
-        ::Mail.register_interceptor(MailEnvi::Jealousy) unless %w(production).include? MailEnvi.ronment.to_s
+        if MailEnvi.config.environments.include?(MailEnvi.ronment.to_s)
+          ::Mail.register_interceptor(MailEnvi.config.interceptor)
+        end
       end
     end
   end
@@ -14,14 +19,23 @@ module MailEnvi
     ::Rails.env
   end
 
+  def self.config &block
+    if block_given?
+      @config = MailEnvi::Config.new &block
+    else
+      @config ||= MailEnvi::Config.new
+    end
+  end
+
+  def self.reset!
+    @config = nil
+  end
+
 
   class Jealousy
-    DEFAULT_TO      = 'root@localhost'
-    DEFAULT_SUBJECT = "(#{MailEnvi.ronment} Interception)"
-
     def self.delivering_email(msg)
-      msg.subject = DEFAULT_SUBJECT
-      msg.to      = DEFAULT_TO
+      msg.to      = MailEnvi.config.default_to
+      msg.subject = "(#{MailEnvi.ronment} Interception) #{msg.subject}"
     end
   end
 end
