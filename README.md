@@ -8,7 +8,7 @@ A basic Mail interceptor gem for (Rails 3) development/test and other environmen
 
     gem "mail_envi"
 
-That is about it. 
+That is about it.
 
     group :development do
       gem "mail_envi"
@@ -18,7 +18,7 @@ While, you can configure the MailEnvi to work within any environment. For most b
 
 Intercepted mail will, by default, change the `to` address to `root@localhost` and will prefix the subject to identify it was intercepted.
 
-Ex: 
+Ex:
 
     # original mail
     to: foo@bar.com
@@ -42,11 +42,36 @@ In your `initializer/mail_envi.rb`
       config.include_environments [:beta, :alpha]
     end
 
-| key | accepted value | description |
-| :- | :- | :- |
-| interceptor | Class | You can provide a custom interceptor class to provide customized interception "your way". |
-| default_to | String | Replace the `DefaultInterceptor`'s `to` address, to one set in the config. **Only works through the `DefaultInterceptor`** |
-| include_environments | Array | Adds the array, to the list of included environments that should register the interceptor |
+
+<table border="1" cellspacing="0">
+  <col align="left" />
+  <col align="left" />
+  <col align="left" />
+  <thead>
+    <tr>
+      <th>key</th>
+      <th>accepted value</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>interceptor</td>
+      <td>Class</td>
+      <td>You can provide a custom interceptor class to provide customized interception &ldquo;your way&rdquo;.</td>
+    </tr>
+    <tr>
+      <td>default_to</td>
+      <td>String</td>
+      <td>Replace the <code>DefaultInterceptor</code>&rsquo;s <code>to</code> address, to one set in the config. <strong>Only works through the <code>DefaultInterceptor</code></strong></td>
+    </tr>
+    <tr>
+      <td>include_environments</td>
+      <td>Array</td>
+      <td>Adds the array, to the list of included environments that should register the interceptor</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Inspirations
 
@@ -61,7 +86,7 @@ In your `initializer/mail_envi.rb`
 * Multi-environment configurations
 
 ### Contributing to mail_envi
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
