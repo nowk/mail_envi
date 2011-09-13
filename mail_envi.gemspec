@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "lib/mail_envi.rb",
     "lib/mail_envi/config.rb",
+    "mail_envi.gemspec",
     "test/dummy/.gitignore",
     "test/dummy/Rakefile",
     "test/dummy/app/controllers/application_controller.rb",
