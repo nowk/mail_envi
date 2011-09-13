@@ -28,7 +28,7 @@ class TestMailEnvi < ActiveSupport::TestCase
 
       %w(development test staging beta).each do |v|
         stub(MailEnvi).ronment {v}
-        mock(::Mail).register_interceptor(MailEnvi::Jealousy)
+        mock(::Mail).register_interceptor(MailEnvi::DefaultInterceptor)
         mail_envi.run_initializers
       end
     end

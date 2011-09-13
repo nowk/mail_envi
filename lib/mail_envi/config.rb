@@ -9,9 +9,8 @@ module MailEnvi
     attr_accessor :interceptor, :environments, :default_to
 
     def interceptor
-      @interceptor || MailEnvi::Jealousy
+      @interceptor || MailEnvi::DefaultInterceptor
     end
-
 
     def include_environments(envs = [])
       @environments+= envs.map(&:to_s) if envs && envs.any?
@@ -19,10 +18,6 @@ module MailEnvi
 
     def default_to
       @default_to || 'root@localhost'
-    end
-
-    def self.reset!
-      MailEnvi.reset!
     end
   end
 end

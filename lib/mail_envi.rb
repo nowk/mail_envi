@@ -27,12 +27,8 @@ module MailEnvi
     end
   end
 
-  def self.reset!
-    @config = nil
-  end
 
-
-  class Jealousy
+  class DefaultInterceptor
     def self.delivering_email(msg)
       msg.to      = MailEnvi.config.default_to
       msg.subject = "(#{MailEnvi.ronment} Interception) #{msg.subject}"

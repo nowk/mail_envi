@@ -18,7 +18,7 @@ class TestConfig < ActiveSupport::TestCase
   should "have defaults" do
     config = MailEnvi::Config.new
     assert_equal ['development', 'test'], config.environments
-    assert_equal MailEnvi::Jealousy, config.interceptor
+    assert_equal MailEnvi::DefaultInterceptor, config.interceptor
     assert_equal 'root@localhost', config.default_to
   end
 
@@ -51,6 +51,6 @@ class TestConfig < ActiveSupport::TestCase
     stub(msg).subject {"Hello world!"}
     mock(msg).to=("another@company.com")
     mock(msg).subject=(anything)
-    MailEnvi::Jealousy.delivering_email(msg)
+    MailEnvi::DefaultInterceptor.delivering_email(msg)
   end
 end
