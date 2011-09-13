@@ -1,10 +1,9 @@
 require 'test_helper'
 
 require File.expand_path("../../dummy/config/environment.rb",  __FILE__)
-require "rails/test_help"
 
-class UserMailerTest < ActiveSupport::TestCase # ActionMailer::TestCase
-  context "in an included environment" do
+class TestUserMailer < ActionMailer::TestCase
+  context "when configured with MailEnvi" do
     should "be intercepted" do
       mock(user = Object.new)
       stub(user).email {'user@company.com'}

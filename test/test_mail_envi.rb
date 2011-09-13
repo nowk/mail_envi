@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'rails'
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'mail_envi'
@@ -8,7 +7,7 @@ class TestMailEnvi < ActiveSupport::TestCase
   include ActiveSupport::Testing::Isolation
 
   def mail_envi
-    MailEnvi::Rails::RailTie.new
+    MailEnvi::Rails::Railtie.new
   end
 
   context "in a production environment" do

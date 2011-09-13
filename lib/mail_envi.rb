@@ -1,3 +1,4 @@
+require 'rails/railtie'
 require 'mail'
 require 'mail_envi/config'
 
@@ -5,7 +6,7 @@ module MailEnvi
   @config = nil
 
   module Rails
-    class RailTie < ::Rails::Railtie
+    class Railtie < ::Rails::Railtie
       initializer "mail_envi.register_interceptor" do
         if MailEnvi.config.environments.include?(MailEnvi.ronment.to_s)
           ::Mail.register_interceptor(MailEnvi.config.interceptor)
