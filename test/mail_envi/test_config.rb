@@ -4,7 +4,7 @@ $:.unshift File.expand_path('../../../lib', __FILE__)
 require 'mail_envi'
 
 class CustomInterceptor
-  def self.delivering_email(msg); end
+  def self.delivering_email(msg); msg; end
 end
 
 class TestConfig < ActiveSupport::TestCase
