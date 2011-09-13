@@ -1,4 +1,8 @@
 require 'test_helper'
+require 'rails'
+
+$:.unshift File.expand_path('../../lib', __FILE__)
+require 'mail_envi'
 
 class TestMailEnvi < Test::Unit::TestCase
   def mail_envi
