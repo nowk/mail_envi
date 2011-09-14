@@ -1,7 +1,7 @@
 require 'test_helper'
 
-$:.unshift File.expand_path('../../lib', __FILE__)
-require 'mail_envi'
+# $:.unshift File.expand_path('../../lib', __FILE__)
+# require 'mail_envi'
 
 class TestMailEnvi < ActiveSupport::TestCase
   include ActiveSupport::Testing::Isolation
@@ -10,27 +10,34 @@ class TestMailEnvi < ActiveSupport::TestCase
     MailEnvi::Rails::Railtie.new
   end
 
+  context "when running these tests" do
+    should "run faster than it does now" do
+      skip
+    end
+  end
+
   context "in a production environment" do
     setup { stub(MailEnvi).ronment {'production'} }
 
     should "not register the Mail interceptor" do
       dont_allow(::Mail).register_interceptor(anything)
-      mail_envi.run_initializers
+      # mail_envi.run_initializers
+      Dummy::Application.initialize!
     end
   end
 
   context "in a development or included environments" do
     should "register the default Mail interceptor" do
-      skip "This needs fixing"
-      MailEnvi.config do |config|
+      mail_envi_config = MailEnvi.config do |config|
         config.include_environments [:test, :staging, :beta]
       end
 
-      %w(development test staging beta).each do |v|
-        stub(MailEnvi).ronment {v}
-        mock(::Mail).register_interceptor(MailEnvi::DefaultInterceptor)
-        mail_envi.run_initializers
-      end
+      stub(MailEnvi).ronment {'staging'}
+      stub(MailEnvi).config {mail_envi_config}
+
+      mock(::Mail).register_interceptor(MailEnvi::DefaultInterceptor)
+      # mail_envi.run_initializers # does not execute after_initialize
+      Dummy::Application.initialize!
     end
   end
 

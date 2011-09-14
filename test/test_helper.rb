@@ -5,6 +5,7 @@ ENV["RAILS_ENV"] = "test"
 
 # load the dummy app
 # require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require File.expand_path("../dummy/config/application.rb",  __FILE__)
 
 
 begin

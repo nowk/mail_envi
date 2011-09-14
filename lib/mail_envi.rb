@@ -1,4 +1,4 @@
-require 'rails/railtie'
+require 'rails'
 require 'mail'
 require 'mail_envi/config'
 
@@ -21,11 +21,8 @@ module MailEnvi
   end
 
   def self.config &block
-    if block_given?
-      @config = MailEnvi::Config.new &block
-    else
-      @config ||= MailEnvi::Config.new
-    end
+    @config = MailEnvi::Config.new &block if block_given?
+    @config || MailEnvi::Config.new
   end
 
 
