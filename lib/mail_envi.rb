@@ -3,8 +3,6 @@ require 'mail'
 require 'mail_envi/config'
 
 module MailEnvi
-  @config = nil
-
   module Rails
     class Railtie < ::Rails::Railtie
       config.after_initialize do
@@ -21,8 +19,7 @@ module MailEnvi
   end
 
   def self.config &block
-    @config = MailEnvi::Config.new &block if block_given?
-    @config || MailEnvi::Config.new
+    @@config ||= MailEnvi::Config.instance
   end
 
 

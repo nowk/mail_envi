@@ -1,6 +1,6 @@
-# MailEnvi, :require => "mail_envi"
+# MailEnvi
 
-A basic Mail interceptor gem for (Rails 3) development/test and other environments.
+A basic Mail interceptor gem for (Rails 3) development and other environments.
 
 ### Basic Usage
 
@@ -10,11 +10,9 @@ A basic Mail interceptor gem for (Rails 3) development/test and other environmen
 
 That is about it.
 
-    group :development do
-      gem "mail_envi"
-    end
-
 While, you can configure the MailEnvi to work within any environment. For most basic uses, I recommend you keep this gem under your `development` group in your `Gemfile`.
+
+---
 
 Intercepted mail will, by default, change the `to` address to `root@localhost` and will prefix the subject to identify it was intercepted.
 
@@ -36,7 +34,7 @@ There are a few configuration options you can provide to extend/customize the fu
 
 In your `initializer/mail_envi.rb`
 
-    MailEnvi.config do |config|
+    MailEnvi::Config.set do |config|
       config.interceptor = CustomInterceptorClass
       config.default_to  = "person@company.com"
       config.include_environments [:beta, :alpha]

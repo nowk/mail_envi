@@ -22,7 +22,7 @@ class TestConfig < ActiveSupport::TestCase
   end
 
   should "allow the interceptor to be assigned to a custom class" do
-    MailEnvi.config do |config|
+    MailEnvi::Config.set do |config|
       config.interceptor = CustomInterceptor
     end
 
@@ -30,7 +30,7 @@ class TestConfig < ActiveSupport::TestCase
   end
 
   should "allow additional environments to be included" do
-    MailEnvi.config do |config|
+    MailEnvi::Config.set do |config|
       config.include_environments [:test, :staging, 'beta']
     end
 
@@ -39,7 +39,7 @@ class TestConfig < ActiveSupport::TestCase
   end
 
   should "allow the defaults in the default interceptor to be overwritten" do
-    MailEnvi.config do |config|
+    MailEnvi::Config.set do |config|
       config.default_to = "another@company.com"
     end
 

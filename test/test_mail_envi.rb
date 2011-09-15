@@ -28,7 +28,7 @@ class TestMailEnvi < ActiveSupport::TestCase
 
   context "in a development or included environments" do
     should "register the default Mail interceptor" do
-      mail_envi_config = MailEnvi.config do |config|
+      mail_envi_config = MailEnvi::Config.set do |config|
         config.include_environments [:test, :staging, :beta]
       end
 
