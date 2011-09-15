@@ -18,7 +18,7 @@ module MailEnvi
     ::Rails.env
   end
 
-  def self.config &block
+  def self.config
     @@config ||= MailEnvi::Config.instance
   end
 
