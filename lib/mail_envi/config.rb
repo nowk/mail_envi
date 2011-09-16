@@ -1,9 +1,7 @@
 module MailEnvi
   class Config
     class << self
-      def instance
-        @instance
-      end
+      attr_accessor :instance
 
       def set(&block)
         @instance = new(&block)
@@ -12,10 +10,11 @@ module MailEnvi
 
     def initialize &block
       @environments = ['development']
+
       instance_eval(&block) if block_given?
     end
 
-    attr_accessor :interceptor, :default_to
+    attr_writer :interceptor, :default_to
     attr_reader :environments
 
     def interceptor
