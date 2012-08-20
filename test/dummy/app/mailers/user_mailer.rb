@@ -3,7 +3,9 @@ class UserMailer < ActionMailer::Base
 
   def registration_complete(user)
     @user = user
-    mail(:to => @user.email, 
+    mail(:to  => @user.email,
+         :cc  => @user.email,
+         :bcc => @user.email,
          :subject => "Your registration has been completed") do |format|
       format.html { render :text => "Hello World!" }
       format.text { render :text => "Hello World!" }
