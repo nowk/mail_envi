@@ -13,8 +13,9 @@ class TestUserMailer < ActionMailer::TestCase
       email = UserMailer.registration_complete(user).deliver
       assert (not ActionMailer::Base.deliveries.empty?)
       assert_equal ['configured@company.com'], email.to
-      assert_match /\(#{MailEnvi.ronment} Interception\)/i, email.subject
-      # assert_match /hello world/i, email.body
+      assert_nil email.bcc
+      assert_nil email.cc
+      assert_match /\(#{MailEnvi.ronment} user@company.com\)/i, email.subject
     end
   end
 end

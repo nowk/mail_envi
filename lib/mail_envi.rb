@@ -25,8 +25,10 @@ module MailEnvi
 
   class DefaultInterceptor
     def self.delivering_email(msg)
+      msg.subject = "(#{MailEnvi.ronment} #{msg.to.join(", ")}) #{msg.subject}"
       msg.to      = MailEnvi.config.default_to
-      msg.subject = "(#{MailEnvi.ronment} Interception) #{msg.subject}"
+      msg.bcc     = nil
+      msg.cc      = nil
     end
   end
 end
